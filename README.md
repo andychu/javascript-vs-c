@@ -91,11 +91,19 @@ Verify that the two programs do the same thing:
 2. Do performance experiments.  Make a prediction about the speed before
    running it.
    - Try running it in a VM.
-   - Demonstrate a case where transliterating JavaScript is 10x or 100x slower
-     than C.
+   - Demonstrate a case where transliterating JavaScript to C results in code
+     that's 10x or 100x slower.
 
 3. Do the reverse direction: port C to JavaScript by removing types.  This
    should be easier than JavaScript -> C ?
+
+If it works, and you have code that now works in JavaScript and in C, send me
+a link or a pull request to this repo.
+   
+It would also be interesting to know how long the port took.
+
+If this learning-by-porting strategy doesn't work for you, also let me know
+(on Zulip or in person.)
 
 ### Example Bugs
 
@@ -114,25 +122,17 @@ Verify that the two programs do the same thing:
 - On Linux, I had to pass `-l m` on the command line to fix a link error link
   the math library.  And it has to come *after* `mandelbrot.c` on the command
   line (order matters).
+- `printf()` without the right args gives a compiler warning, but still runs!
+  It just produces garbage.
 - `man fwrite` may be useful.
-
-### Follow-Up
-
-1. If it works, and you have code that now works in JavaScript and in C, send
-   me a link or a pull request to this repo.
-   
-   It would also be interesting to know how long the port took.
-
-2. If this learning-by-porting strategy doesn't work for you, also let me know
-   (on Zulip or in person.)
 
 ### Caveats
 
+- For the exercise: You have to find something small enough.  If you get stuck
+  porting a piece of code, find something even smaller.
+
 - Performance: This is the best case for JavaScript.  JavaScript can be many
   times slower than C if the JIT can't do its work.
-
-- You have to find something small enough.  If you get stuck porting a piece
-  of code, find something even smaller.
 
 ### For Advanced Readers
 
