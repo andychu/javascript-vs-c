@@ -1,13 +1,16 @@
 // https://rosettacode.org/wiki/Mandelbrot_set#JavaScript
+// Ported to C.
+#include <stdio.h>
+#include <math.h>
 
-function mandelIter(cx, cy, maxIter) {
-  var x = 0.0;
-  var y = 0.0;
-  var xx = 0;
-  var yy = 0;
-  var xy = 0;
+int mandelIter(double cx, double cy, int maxIter) {
+  double x = 0.0;
+  double y = 0.0;
+  double xx = 0;
+  double yy = 0;
+  double xy = 0;
  
-  var i = maxIter;
+  int i = maxIter;
   while (i-- && xx + yy <= 4) {
     xy = x * y;
     xx = x * x;
@@ -18,27 +21,29 @@ function mandelIter(cx, cy, maxIter) {
   return maxIter - i;
 }
  
-function mandelbrot(pix, width, height, xmin, xmax, ymin, ymax, iterations) {
-  for (var ix = 0; ix < width; ++ix) {
-    for (var iy = 0; iy < height; ++iy) {
-      var x = xmin + (xmax - xmin) * ix / (width - 1);
-      var y = ymin + (ymax - ymin) * iy / (height - 1);
-      var i = mandelIter(x, y, iterations);
-      var ppos = 4 * (width * iy + ix);
+void mandelbrot(char* pix, int width, int height,
+                double xmin, double xmax,
+                double ymin, double ymax, int iterations) {
+  for (int ix = 0; ix < width; ++ix) {
+    for (int iy = 0; iy < height; ++iy) {
+      double x = xmin + (xmax - xmin) * ix / (width - 1);
+      double y = ymin + (ymax - ymin) * iy / (height - 1);
+      int i = mandelIter(x, y, iterations);
+      int ppos = 4 * (width * iy + ix);
  
       if (i > iterations) {
         pix[ppos] = 0;
         pix[ppos + 1] = 0;
         pix[ppos + 2] = 0;
       } else {
-        var c = 3 * Math.log(i) / Math.log(iterations - 1.0);
+        double c = 3 * log((double)i) / log((double)(iterations - 1.0));
  
-        if (c < 1) {
+        if (c < 1.0) {
           pix[ppos] = 255 * c;
           pix[ppos + 1] = 0;
           pix[ppos + 2] = 0;
         }
-        else if ( c < 2 ) {
+        else if ( c < 2.0 ) {
           pix[ppos] = 255;
           pix[ppos + 1] = 255 * (c - 1);
           pix[ppos + 2] = 0;
@@ -51,24 +56,25 @@ function mandelbrot(pix, width, height, xmin, xmax, ymin, ymax, iterations) {
       pix[ppos + 3] = 255;
     }
   }
- 
 }
  
-function main(canvas) {
-  var width = canvas.width;
-  var height = canvas.height;
- 
-  var ctx = canvas.getContext('2d');
-  var img = ctx.getImageData(0, 0, width, height);
-  var pix = img.data;
- 
-  var start_time = performance.now();
-  // TODO: Do we really have to pass in the width and height?
+int main() {
+  const int width = 900;
+  const int height = 600;
+
+  char pix[width * height * 4];
   mandelbrot(pix, width, height, -0.75, 0.25, 0.20, 0.75, 1000);
-  var elapsed = performance.now() - start_time;
 
-  document.getElementById('perf').innerHTML = 'Mandlebrot rendered in ' +
-    Math.round(elapsed) + ' ms';
+  printf("Rendering Mandelbrot ...");
+  FILE* fp = fopen("out.ppm", "wb"); /* b -  binary mode */
 
-  ctx.putImageData(img, 0, 0);
+  fprintf(fp,"P6\n # \n %d\n %d\n 255\n", width,height);
+
+  for (int iy = 0; iy < height; ++iy) {
+    for (int ix = 0; ix < width; ++ix) {
+      int ppos = 4 * (width * iy + ix);
+      fwrite(&pix[ppos], 1, 3, fp);
+    }
+  }
+  fclose(fp);
 }
