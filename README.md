@@ -74,6 +74,7 @@ Verify that the two programs do the same thing:
 - Learn how to read error messages (compiler errors and warnings).
 - Learn how to obtain better error messages (stack traces)
   - With [GDB][] and/or [ASAN][].
+- Experiment with flags like `-O3` and `-Wall`.
 
 ## Exercises
 
