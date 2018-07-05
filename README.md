@@ -40,22 +40,23 @@ Verify that the two programs do the same thing:
 ### How I Ported It
 
 1. Downloaded https://rosettacode.org/wiki/Mandelbrot_set#JavaScript 
-2. Wrote `mandelbrot.html` to test `mandelbrot.js`
-3. Separated the **scaffolding** from the **computation**.  That is, I
-   factored out a `main()` function that was independent from browser-specific
-   stuff like `canvas`.  Only the computation can be ported to C.
+2. Added `mandelbrot.html` for `mandelbrot.js` to render to.
+3. In JavaScript, Separated the **scaffolding** from the **computation**.
+   That is, I factored out a `main()` function that was independent from
+   browser-specific stuff like `canvas`.  Only the computation can be ported
+   to C.
 4. `cp mandelbrot.js mandelbrot.c`.
-5. Commented the whole thing out and then add a "hello world" `main()`
+5. Commented all the JavaScript out, then added a "hello world" `main()`
    function in C.  Make sure it compiles and runs.
 6. Uncommented one function at a time.  Added types until it compiles.
    - Figure out which vars are floating point numbers (`double`) and which
      vars are integers (`int`).  Declare an array of bytes (`char[]`).
-7. Write new scaffolding to save the array of bytes to as a `.ppm` file, which
-   I learned about from
+7. Write new scaffolding in C.  It saves the array of bytes to as a `.ppm`
+   file, which I learned about from
    https://rosettacode.org/wiki/Mandelbrot_set#PPM_non_interactive .  (NOTE:
-   This C code doesn't do the same thing as the JavaScript, so it wasn't good
-   for my benchmark.)
-8. Localize errors with GDB (particularly the segfault).
+   The C and JavaScript should do the same thing in order to produce a
+   meaningful benchmark.)
+8. Run it.  Localize errors with GDB (particularly the segfault).
 9. Debug with `printf()`.
 
 #### Time Spent
@@ -83,9 +84,9 @@ Verify that the two programs do the same thing:
 
    1. Are short.  Start with something 20-50 lines, and then work your way up
       to bigger pieces of code.
-   1. Don't use too many libraries.  Writing an image into an array is ideal.
+   1. Don't use too many libraries.  Writing an image to an array is ideal.
    1. Use numbers, not strings.  (Strings in C are very different than strings
-      in JavaScript.)
+     in JavaScript.)
 
 2. Do performance experiments.  Make a prediction about the speed before
    running it.
