@@ -4,9 +4,9 @@ An Exercise to Learn C
 As a performance experiment, I ported a small piece of JavaScript to C.  I
 tried to do it as fast as possible, like this:
 
-1. Dumb Textual Substitution
+1. Dumb textual substitution.
 2. Fix compile errors.
-3. Debug runtime errors (with printf and GDB)
+3. Debug runtime errors (with `printf()` and GDB).
 
 After doing this, I conjectured that it's a good exercise for people who
 want to learn C.  It's a complement to the "textbook way" of writing programs
@@ -20,12 +20,12 @@ Center](https://www.recurse.com/) on this topic.
 You should know some of the basic concepts of C, like what an `int` and a
 `double` is.  Knowing where `char*` is used would be useful.
 
-I'm advocating somewhat mindless hacking as a shortcut to learning, but it
-shouldn't be random hacking. :-)
+I'm advocating *somewhat mindless* hacking as a shortcut to learning, but it
+shouldn't be *random* hacking. :-)
 
 ### Try It
 
-Try the two programs, and verify they do the same thing.
+Verify that the two programs do the same thing:
 
 1. Open up mandelbrot.html in your browser.
 2. `./run.sh c` to run the C version.  Then open `out.ppm`. (The OS X Finder
@@ -39,22 +39,23 @@ Try the two programs, and verify they do the same thing.
 ### How I Ported It
 
 1. Downloaded https://rosettacode.org/wiki/Mandelbrot_set#JavaScript 
-2. Wrote mandelbrot.html to test mandelbrot.js
-3. Separated the *scaffolding* from the computation.  That is, I factored out
-   a `main()` function to separate the browser-specific JS stuff (`canvas`)
-   from the computation.  Only the computation can be ported to C.
+2. Wrote `mandelbrot.html` to test `mandelbrot.js`
+3. Separated the **scaffolding** from the **computation**.  That is, I
+   factored out a `main()` function that was independent from browser-specific
+   stuff like `canvas`.  Only the computation can be ported to C.
 4. `cp mandelbrot.js mandelbrot.c`.
 5. Commented the whole thing out and then add a "hello world" `main()`
    function in C.  Make sure it compiles and runs.
-6. Uncomment one function at a time.  Added types until it compiles.
-   - Example: Figure out what is a floating point number (`double`) and what
-     is an integer (`int`).  Declare an array of bytes (`char[]`).
-7. Write new scaffolding to save the array of bytes to as a "PPM" file, which
+6. Uncommented one function at a time.  Added types until it compiles.
+   - Figure out which vars are floating point numbers (`double`) and which
+     vars are integers (`int`).  Declare an array of bytes (`char[]`).
+7. Write new scaffolding to save the array of bytes to as a `.ppm` file, which
    I learned about from
    https://rosettacode.org/wiki/Mandelbrot_set#PPM_non_interactive .  (NOTE:
    This C code doesn't do the same thing as the JavaScript, so it wasn't good
    for my benchmark.)
-8. Localize errors with GDB.  Debug with `printf()`.
+8. Localize errors with GDB (particularly the segfault).
+9. Debug with `printf()`.
 
 #### Time Spent
 

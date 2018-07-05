@@ -8,9 +8,6 @@ set -o pipefail
 set -o errexit
 
 compile() {
-  # Started with:
-  # cc -o mandelbrot mandelbrot.c
-
   cc -g -Wall -o mandelbrot mandelbrot.c -l m "$@"
   ls -l mandelbrot
 }
@@ -26,6 +23,7 @@ c() {
 # r to run
 # q to exit
 debug() {
+  #naive-compile
   compile
   gdb --args ./mandelbrot
 }
@@ -56,6 +54,16 @@ compare() {
     diff -y mandelbrot.js mandelbrot.c
   fi
 }
+
+#
+# For the presentation
+#
+
+# You don't get function names or line numbers here
+naive-compile() {
+  cc -o mandelbrot mandelbrot.c -l m
+}
+
 
 bug2() {
   cc -o bug2 bug2.c
