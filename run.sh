@@ -23,8 +23,8 @@ c() {
 # r to run
 # q to exit
 debug() {
-  #naive-compile
-  compile
+  naive-compile
+  #compile
   gdb --args ./mandelbrot
 }
 
@@ -63,7 +63,6 @@ compare() {
 naive-compile() {
   cc -o mandelbrot mandelbrot.c -l m
 }
-
 
 bug2() {
   cc -o bug2 bug2.c

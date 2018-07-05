@@ -62,8 +62,8 @@ int main() {
   const int width = 900;
   const int height = 600;
 
-  //char pix[width * height];  // BUG
-  char pix[width * height * 4];
+  char pix[width * height];  // BUG
+  //char pix[width * height * 4];
   mandelbrot(pix, width, height, -0.75, 0.25, 0.20, 0.75, 1000);
 
   printf("Rendering Mandelbrot ...");
