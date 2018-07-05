@@ -15,7 +15,7 @@ from scratch.
 I'm giving a 5-minute presentation at the [Recurse
 Center](https://www.recurse.com/) on this topic.
 
-### Prerequisites
+## Prerequisites
 
 You should know some of the basic concepts of C, like what an `int` and a
 `double` is.  Knowing where `char*` is used would be useful.
@@ -23,7 +23,7 @@ You should know some of the basic concepts of C, like what an `int` and a
 I'm advocating *somewhat mindless* hacking as a shortcut to learning, but it
 shouldn't be *random* hacking. :-)
 
-### Try It
+## Try It
 
 Verify that the two programs do the same thing:
 
@@ -32,12 +32,12 @@ Verify that the two programs do the same thing:
    `out.ppm`. (The OS X Finder only shows a thumbnail, but Ubuntu can view it
    by default.)
 
-### Overview of the Source
+## Overview of the Source
 
     $ ./run.sh count
     $ ./run.sh compare
 
-### How I Ported It
+## How I Ported It
 
 1. Downloaded https://rosettacode.org/wiki/Mandelbrot_set#JavaScript 
 2. Added `mandelbrot.html` for `mandelbrot.js` to render to.
@@ -59,7 +59,7 @@ Verify that the two programs do the same thing:
 8. Run it.  Localize errors with GDB (particularly the segfault).
 9. Debug with `printf()`.
 
-#### Time Spent
+### Time Spent
 
 - Friday: 60-90 minutes downloading Python, JS, and C versions.  Playing
   around with them and comparing what they did.  Figuring out what I wanted to
@@ -67,7 +67,7 @@ Verify that the two programs do the same thing:
 - Monday: 60-90 minutes discussing it with Aurora, porting it, and debugging
   the two major bugs (segfault and "missing" type error).
 
-### Lessons / Advice
+## Lessons / Advice
 
 - Treat C like Python or Ruby by writing a tiny shell script.  `[demo]`
   - Don't worry about build systems for now.
@@ -75,7 +75,7 @@ Verify that the two programs do the same thing:
 - Learn how to obtain better error messages (stack traces)
   - With [GDB][] and/or [ASAN][].
 
-### Exercises
+## Exercises
 
 1. Do the same thing with a different piece of code!  Find another small piece
    of JavaScript code on the Internet, and follow the steps above.
@@ -105,19 +105,19 @@ It would also be interesting to know how long the port took.
 If this learning-by-porting strategy doesn't work for you, also let me know
 (on Zulip or in person.)
 
-### Example Bugs
+## Example Bugs
 
-#### Bug #1: Segfault
+### Bug #1: Segfault
 
 `[live demo]` with [GDB][] and [ASAN][].
 
 - Need to pass `-g` flag to get symbols
 
-#### Bug #2: The Screen is Black
+### Bug #2: The Screen is Black
 
 `[live quiz]` with bug2.c.
 
-#### Other Issues
+### Other Issues
 
 - On Linux, I had to pass `-l m` on the command line to fix a link error link
   the math library.  And it has to come *after* `mandelbrot.c` on the command
@@ -126,14 +126,14 @@ If this learning-by-porting strategy doesn't work for you, also let me know
   It just produces garbage.
 - `man fwrite` may be useful.
 
-### Caveats
+## Caveats
 
 - For the exercise: You have to find something small enough.  If you get stuck
   porting a piece of code, find something even smaller.
 - Performance: This is the best case for JavaScript.  JavaScript can be many
   times slower than C if the JIT can't do its work.
 
-### For Advanced Readers
+## For Advanced Readers
 
 - Types: hardware view vs. the mathematical view (contrast with Haskell or
   Rust).
