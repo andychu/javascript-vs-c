@@ -6,7 +6,7 @@ tried to do it as fast as possible, like this:
 
 1. Dumb textual substitution.
 2. Fix compile errors.
-3. Debug runtime errors (with `printf()` and GDB).
+3. Debug runtime errors (with `printf()` and [GDB][]).
 
 After doing this, I conjectured that it's a good exercise for people who
 want to learn C.  It's a complement to the "textbook way" of writing programs
@@ -27,9 +27,10 @@ shouldn't be *random* hacking. :-)
 
 Verify that the two programs do the same thing:
 
-1. Open up mandelbrot.html in your browser.
-2. `./run.sh c` to run the C version.  Then open `out.ppm`. (The OS X Finder
-   only shows a thumbnail, but Ubuntu can view it by default.)
+1. Open up `mandelbrot.html` in your browser.
+2. In your shell, type `./run.sh c` to run the C version.  Then open
+   `out.ppm`. (The OS X Finder only shows a thumbnail, but Ubuntu can view it
+   by default.)
 
 ### Overview of the Source
 
@@ -69,11 +70,9 @@ Verify that the two programs do the same thing:
 
 - Treat C like Python or Ruby by writing a tiny shell script.  `[demo]`
   - Don't worry about build systems for now.
-
 - Learn how to read error messages (compiler errors and warnings).
-
 - Learn how to obtain better error messages (stack traces)
-  - With GDB and/or ASAN
+  - With [GDB][] and/or [ASAN][].
 
 ### Exercises
 
@@ -98,7 +97,7 @@ Verify that the two programs do the same thing:
    should be easier than JavaScript -> C ?
 
 If it works, and you have code that now works in JavaScript and in C, send me
-a link or a pull request to this repo.
+a link or a **pull request** to this repo.
    
 It would also be interesting to know how long the port took.
 
@@ -109,7 +108,7 @@ If this learning-by-porting strategy doesn't work for you, also let me know
 
 #### Bug #1: Segfault
 
-`[live demo]` with GDB and ASAN.
+`[live demo]` with [GDB][] and [ASAN][].
 
 - Need to pass `-g` flag to get symbols
 
@@ -130,7 +129,6 @@ If this learning-by-porting strategy doesn't work for you, also let me know
 
 - For the exercise: You have to find something small enough.  If you get stuck
   porting a piece of code, find something even smaller.
-
 - Performance: This is the best case for JavaScript.  JavaScript can be many
   times slower than C if the JIT can't do its work.
 
@@ -141,9 +139,11 @@ If this learning-by-porting strategy doesn't work for you, also let me know
   - C used to be a dynamic language! Show untyped C.
   - In C, types are only for instruction selection.  Nothing more.
   - C++ is different than C.
-
 - [Hello, JIT
   World](http://blog.reverberate.org/2012/12/hello-jit-world-joy-of-simple-jits.html)
   -- The mechanism that allows modern JavaScript engines to be comparable in
   speed to C (for some problems).
 
+[GDB]: https://beej.us/guide/bggdb/
+
+[ASAN]: https://github.com/google/sanitizers/wiki/AddressSanitizer
