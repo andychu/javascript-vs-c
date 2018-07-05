@@ -11,7 +11,7 @@ compile() {
   # Started with:
   # cc -o mandelbrot mandelbrot.c
 
-  cc -g -Wall -o mandelbrot mandelbrot.c -l m
+  cc -g -Wall -o mandelbrot mandelbrot.c -l m "$@"
   ls -l mandelbrot
 }
 
@@ -28,6 +28,15 @@ c() {
 debug() {
   compile
   gdb --args ./mandelbrot
+}
+
+with-asan() {
+  echo 'Compiling with ASAN instrumentation'
+  compile -fsanitize=address
+
+  echo 'Rendering fractal...'
+  time ./mandelbrot
+  ls -l out.ppm
 }
 
 count() {
