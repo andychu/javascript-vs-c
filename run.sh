@@ -57,4 +57,14 @@ compare() {
   fi
 }
 
+bug2() {
+  cc -o bug2 bug2.c
+  ./bug2
+}
+
+bug3() {
+  cc -o bug3 bug3.c
+  ./bug3
+}
+
 "$@"
