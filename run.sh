@@ -8,7 +8,7 @@ set -o pipefail
 set -o errexit
 
 compile() {
-  cc -g -Wall -o mandelbrot mandelbrot.c -l m "$@"
+  cc -O3 -g -Wall -o mandelbrot mandelbrot.c -l m "$@"
   ls -l mandelbrot
 }
 

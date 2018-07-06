@@ -69,12 +69,44 @@ Verify that the two programs do the same thing:
 
 ## Lessons / Advice
 
-- Treat C like Python or Ruby by writing a tiny shell script.  `[demo]`
-  - Don't worry about build systems for now.
+- Treat C like Python or Ruby by writing a tiny shell script to compile and run
+  in one step (see `run.sh`).  Don't worry about build systems for now.
 - Learn how to read error messages (compiler errors and warnings).
-- Learn how to obtain better error messages (stack traces)
-  - With [GDB][] and/or [ASAN][].
-- Experiment with flags like `-O3` and `-Wall`.
+- Learn how to obtain better error messages with [GDB][] or [ASAN][].
+  - [ASAN][] is a compiler instrumentation mode.  See below for a demo.  You
+    don't have to install anything; just pass `-fsanitize=address` to the
+    compiler!  (It works on modern versions of gcc or Clang, on Linux or OS X).
+- Experiment with and understand flags like `-O3` and `-Wall`.
+
+## ASAN
+
+Without ASAN:
+
+    $ ./run.sh c
+    -rwxrwxr-x 1 andy andy 21104 Jul  6 08:23 mandelbrot
+    Rendering fractal...
+    ./run.sh: line 15: 26457 Segmentation fault      (core dumped) ./mandelbrot
+
+Hm, **where** is the error?
+
+With ASAN: now you have a stack trace with line numbers.  You can get this
+information with [GDB][] too (but you need to know commands like `r` / `run`
+and `bt`).
+
+    $ ./run.sh with-asan
+    Compiling with ASAN instrumentation
+    -rwxrwxr-x 1 andy andy 27368 Jul  6 08:18 mandelbrot
+    Rendering fractal...
+    ASAN:SIGSEGV
+    =================================================================
+    ==26421==ERROR: AddressSanitizer: SEGV on unknown address 0x7fff2ab52740 (pc 0x000000400ed1 bp 0x000000000258 sp 0x7fff2aacbf10 T0)
+        #0 0x400ed0 in mandelbrot /home/andy/git/javascript-vs-c/mandelbrot.c:48
+        #1 0x400990 in main /home/andy/git/javascript-vs-c/mandelbrot.c:67
+        #2 0x7f024f81082f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2082f)
+        #3 0x400a88 in _start (/home/andy/git/javascript-vs-c/mandelbrot+0x400a88)
+
+    AddressSanitizer can not provide additional info.
+    SUMMARY: AddressSanitizer: SEGV /home/andy/git/javascript-vs-c/mandelbrot.c:48 mandelbrot
 
 ## Exercises
 
