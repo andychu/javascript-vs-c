@@ -37,6 +37,11 @@ Verify that the two programs do the same thing:
     $ ./run.sh count
     $ ./run.sh compare
 
+[Diff from JavaScript to C](https://github.com/andychu/javascript-vs-c/commit/e7c60bd5c72d1925b586b5a712737e6b4c7579de)
+
+A lot of it is just adding types!  And separating the "scaffolding" from the
+computation.
+
 ## How I Ported It
 
 1. Downloaded https://rosettacode.org/wiki/Mandelbrot_set#JavaScript 
