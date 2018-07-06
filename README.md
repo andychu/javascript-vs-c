@@ -20,8 +20,8 @@ Center](https://www.recurse.com/) on this topic.
 You should know some of the basic concepts of C, like what an `int` and a
 `double` is.  Knowing where `char*` is used would be useful.
 
-I'm advocating *somewhat mindless* hacking as a shortcut to learning, but it
-shouldn't be *random* hacking. :-)
+I'm advocating **somewhat mindless** hacking as a shortcut to learning, but it
+shouldn't be **random** hacking. :-)
 
 ## Try It
 
@@ -75,7 +75,7 @@ Verify that the two programs do the same thing:
 - Learn how to obtain better error messages with [GDB][] or [ASAN][].
   - [ASAN][] is a compiler instrumentation mode.  See below for a demo.  You
     don't have to install anything; just pass `-fsanitize=address` to the
-    compiler!  (It works on modern versions of gcc or Clang, on Linux or OS X).
+    compiler.  It works on modern versions of gcc or Clang, on Linux or OS X.
 - Experiment with and understand flags like `-O3` and `-Wall`.
 
 ## ASAN
@@ -87,9 +87,9 @@ Without ASAN:
     Rendering fractal...
     ./run.sh: line 15: 26457 Segmentation fault      (core dumped) ./mandelbrot
 
-Hm, **where** is the error?
+Hm, **where is the error**?
 
-With ASAN: now you have a stack trace with line numbers.  You can get this
+With ASAN: now you have a **stack trace with line numbers**.  You can get this
 information with [GDB][] too (but you need to know commands like `r` / `run`
 and `bt`).
 
@@ -110,25 +110,20 @@ and `bt`).
 
 ## Exercises
 
-1. Do the same thing with a different piece of code!  Find another small piece
-   of JavaScript code on the Internet, and follow the steps above.
-   
-   Good candidates for code to port:
-
+1. Do the same thing with a different piece of code!  Find another small
+   JavaScript program on the Internet, and follow the steps above.  Good candidates for code to port:
    1. Are short.  Start with something 20-50 lines, and then work your way up
       to bigger pieces of code.
    1. Don't use too many libraries.  Writing an image to an array is ideal.
    1. Use numbers, not strings.  (Strings in C are very different than strings
      in JavaScript.)
-
 2. Do performance experiments.  Make a prediction about the speed before
    running it.
    - Try running it in a VM.
    - Demonstrate a case where transliterating JavaScript to C results in code
      that's 10x or 100x slower.
-
-3. Do the reverse direction: port C to JavaScript by removing types.  This
-   should be easier than JavaScript -> C ?
+3. The reverse direction: port C to JavaScript by removing types.  This should
+   be easier than JavaScript -> C ?
 
 If it works, and you have code that now works in JavaScript and in C, send me
 a link or a **pull request** to this repo.
@@ -168,11 +163,10 @@ If this learning-by-porting strategy doesn't work for you, also let me know
 
 ## For Advanced Readers
 
-- Types: hardware view vs. the mathematical view (contrast with Haskell or
+- Types: the hardware view vs. the mathematical view (contrast with Haskell or
   Rust).
   - C used to be a dynamic language! Show untyped C.
   - In C, types are only for instruction selection.  Nothing more.
-  - C++ is different than C.
 - [Hello, JIT
   World](http://blog.reverberate.org/2012/12/hello-jit-world-joy-of-simple-jits.html)
   -- The mechanism that allows modern JavaScript engines to be comparable in
